@@ -18,6 +18,7 @@ module.exports = (app) => {
     app.get('/find-all-threads', threadController.findAllThreads)
     app.post('/add-comment-to-thread', threadController.addCommentToThread)
     app.get('/delete-thread-by-id', threadController.deleteThreadbyId)
+    app.get('find-comments-to-thread', threadController.findCommentsToThread)
 
    
   }

@@ -66,6 +66,19 @@ exports.addThread = (req, res, next) => {
 	})
 }
 
+exports.findCommentsToThread = (req, res, next) => {
+	Thread.find( {_id:req.query.id}, (err,thread) => {
+		comments = thread.ThreadComments
+		if(!err) {
+			if(thread != null) {
+				return res.send({ success:true, comments })
+			}else return res.send({ success: false, message: 'Unexpected error' })
+		}else return res.send({ success: false, message: 'Unexpected error' })
+
+	} )
+}
+
+
 exports.addCommentToThread = (req, res, next) => {
 	const newComment = {
 		CommentAuthor: req.body.commentAuthor,
