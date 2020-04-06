@@ -15,7 +15,8 @@ var threadSchema = new Schema({
 	ThreadComments: [{
 		CommentAuthor: String,
 		CommentDate: Date,
-		CommentBody: String
+		CommentBody: String,
+		SessionId: String
 	}]
 },
 {collection: 'threads'})
