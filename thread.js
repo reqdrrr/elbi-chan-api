@@ -11,6 +11,7 @@ var threadSchema = new Schema({
 	ThreadAuthor: String,
 	ThreadDate: Date,
 	ThreadBody: String,
+	SessionId: String,
 	ThreadComments: [{
 		CommentAuthor: String,
 		CommentDate: Date,
@@ -55,7 +56,8 @@ exports.addThread = (req, res, next) => {
 		ThreadTitle: req.body.threadTitle,
 		ThreadAuthor: req.body.threadAuthor,
 		ThreadDate: new Date(),
-		ThreadBody: req.body.threadBody
+		ThreadBody: req.body.threadBody,
+		SessionId: req.body.sessionId
 	})
 
 	newThread.save((err) => {
