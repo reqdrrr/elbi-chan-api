@@ -41,9 +41,9 @@ exports.findAllThreads = (req, res, next) => {
 }
 
 exports.findThreadById = (req, res, next) => {
-	Post.findOne({_id: req.query.id}, (err, thread) => {
+	Thread.findOne({_id: req.query.id}, (err, thread) => {
 		if(!err){
-			if(post != null){
+			if(thread != null){
 				return res.send({ success: true, thread })
 			}else return res.send({ success: false, message: 'Unexpected error' })
 		}else return res.send({ success: false, message: 'Unexpected error' })
@@ -76,5 +76,16 @@ exports.addCommentToThread = (req, res, next) => {
 	Thread.findOneAndUpdate( {_id: req.body.id}, {$push: {ThreadComments: newComment}}, (err,thread) => {
 		if(!err) return res.send({ success: true, thread })
 		else return res.send({ success: false, message: 'Unexpected error' })
+	})
+}
+
+exports.deleteThreadbyId = (req, res, next) => {
+	Thread.findOne({_id: req.query.id}, (err, thread) => {
+		if(!err){
+			if(thread != null){
+				Thread.deleteMany({_id:req.query.id}, (err,out) => {} )
+				return res.send({ success: true, message: 'Successfully deleted thread' })
+			}else return res.send({ success: false, message: 'Unexpected error' })
+		}else return res.send({ success: false, message: 'Unexpected error' })
 	})
 }
