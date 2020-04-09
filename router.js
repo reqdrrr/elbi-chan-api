@@ -20,7 +20,7 @@ module.exports = (app) => {
     app.post('/add-comment-to-thread', threadController.addCommentToThread)
     app.get('/delete-thread-by-id', threadController.deleteThreadbyId)
     app.get('find-comments-to-thread', threadController.findCommentsToThread)
-    app.post('/delete-comment', threadController.deleteComment)
+    app.get('/delete-comment', threadController.deleteComment)
 
    
   }
