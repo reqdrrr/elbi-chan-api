@@ -93,6 +93,20 @@ exports.addCommentToThread = (req, res, next) => {
 	})
 }
 
+exports.deleteComment = (req, res, next) => {
+	Thread.findOne({_id: req.body.id}, (err, thread) => {
+		if(!err){
+			if(thread != null){
+				for(var i=0; i<thread.ThreadComments.length; i++) {
+					if(thread.ThreadComments[i].CommentBody===req.body.content && thread.ThreadComments[i].CommentAuthor==req.body.author) {
+						thread.ThreadComments.splice(i,1)
+					}res.send({ success: true })
+				}
+			}else return res.send({ success: false, message: 'Unexpected error' })
+		}else return res.send({ success: false, message: 'Unexpected error' })
+	})
+}
+
 exports.deleteThreadbyId = (req, res, next) => {
 	Thread.findOne({_id: req.query.id}, (err, thread) => {
 		if(!err){
